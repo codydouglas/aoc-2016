@@ -19,9 +19,13 @@ const directions = input
 // log(directions);
 
 const position = { x: 0, y: 0 };
-let facing = "N";
+const visitedPositions = new Set();
 
-directions.forEach((element) => {
+let facing = "N";
+let found = false;
+
+for (const element of directions) {
+  if (found) break;
   if (element.turn === "R") {
     if (facing === "N") facing = "E";
     else if (facing === "E") facing = "S";
@@ -34,22 +38,39 @@ directions.forEach((element) => {
     else if (facing === "S") facing = "E";
     else if (facing === "W") facing = "S";
   }
-  if (facing === "N") {
-    position.y = position.y + element.distance;
-  }
-  if (facing === "E") {
-    position.x = position.x + element.distance;
-  }
-  if (facing === "S") {
-    position.y = position.y - element.distance;
-  }
-  if (facing === "W") {
-    position.x = position.x - element.distance;
-  }
-});
+  for (let i = 0; i < element.distance; i++) {
+    if (facing === "N") {
+      position.y = position.y + 1;
+    }
+    if (facing === "E") {
+      position.x = position.x + 1;
+    }
+    if (facing === "S") {
+      position.y = position.y - 1;
+    }
+    if (facing === "W") {
+      position.x = position.x - 1;
+    }
 
-log(position);
+    const coord = `${position.x},${position.y}`;
+
+    if (visitedPositions.has(coord)) {
+      log(visitedPositions);
+
+      log("First Location twice: ", coord);
+      log("Distance: ", Math.abs(position.y) + Math.abs(position.x));
+      found = true;
+      break;
+    }
+    visitedPositions.add(coord);
+  }
+}
+// log(visitedPositions);
+
+// log(position);
 
 const finalValue = Math.abs(position.x) + Math.abs(position.y);
 
 log(finalValue);
+
+// log(directions);
