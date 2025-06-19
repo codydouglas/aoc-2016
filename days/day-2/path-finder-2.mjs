@@ -10,13 +10,13 @@ import { log } from "../../utils/log.mjs";
 //     "\n"
 //   );
 
-// const keypad = [
-//   [1, 2, 3],
-//   [4, 5, 6],
-//   [7, 8, 9],
-// ];
+const keypad = [
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
+];
 
-// const position = { y: 1, x: 1 };
+const position = { y: 1, x: 1 };
 // let code = "";
 
 // for (const direction of input) {
@@ -56,16 +56,21 @@ RLLDRDURRUDULLURLRLLURUDDLULUULRRRDRLULDDRLUDRDURLUULDUDDDDDUDDDDLDUDRDRRLRLRLUR
 
 const n = null;
 
-const keypad = [
-  [n, n, 1, n, n],
-  [n, 2, 3, 4, n],
-  [5, 6, 7, 8, 9],
-  [n, "A", "B", "C", n],
-  [n, n, "D", n, n],
-];
+// const keypad = [
+//   [n, n, 1, n, n],
+//   [n, 2, 3, 4, n],
+//   [5, 6, 7, 8, 9],
+//   [n, "A", "B", "C", n],
+//   [n, n, "D", n, n],
+// ];
 
-const position = { y: 2, x: 0 };
+// const position = { y: 2, x: 0 };
 let code = "";
+// const directions = ["U", "D", "L", "R"];
+const right = "R";
+const left = "L";
+const up = "U";
+const down = "D";
 
 // const nullCheck = () => keypad[position.y][position.x] !== n;
 const postionCheck = () => keypad[position.y][position.x];
@@ -88,9 +93,9 @@ for (const direction of input) {
     }
     if (
       newY >= 0 &&
-      newY < 5 &&
+      newY < keypad.length &&
       newX >= 0 &&
-      newX < 5 &&
+      newX < keypad.length &&
       keypad[newY][newX] !== n
     ) {
       position.y = newY;
